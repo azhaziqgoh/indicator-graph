@@ -1,0 +1,160 @@
+<html>
+  <style>
+    .container {
+      width: 100%;
+    }
+
+    .th-indicator, .th-indicator-bg .split {
+      height: 30px;
+      position: relative;
+    }
+
+    .th-indicator-bg {
+      display: flex;
+    }
+
+    .th-indicator-bg .split:first-of-type {
+      background-color: red; /* Dynamically define */
+      width: calc(30% + 5px); /* Dynamically define */
+    }
+
+    .th-indicator-bg .split:last-of-type {
+      background-color: green; /* Dynamically define */
+      width: calc(70% - 5px); /* Dynamically define */
+    }
+
+    .th-line-container {
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      left: calc(0% + 10px);
+    }
+
+    .th-line {
+      width: calc(100% - 10px - 8px);
+      background-color: transparent;
+      height: 1px;
+      position: relative;
+    }
+
+    .th-line-secondary {
+      width: 100%;
+      background-color: #ffffff;
+      height: 1.5px;
+      position: absolute;
+      top: 50%;
+      z-index: 1;
+    }
+    
+    /* Circle marker is here */
+    .th-line::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+      background-color: #ffffff;
+      position: absolute;
+      top: calc(50% - 5px);
+      left: calc(30% - 5px); /* This where we play around with */
+    }
+
+    .th-line::after {
+      content: "";
+      position: absolute;
+      width: 0; 
+      height: 0; 
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+      border-left: 8px solid #ffffff;
+      top: -3px;
+      left: 100%;
+    }
+    
+    .th-horizontal-line-container {
+      position: absolute;
+      left: 50%;
+      top: -15px;
+    }
+
+    .th-horizontal-line-marker {
+      width: 1.5px;
+      height: 30px;
+      background-color: #ffffff;
+      position: relative;
+    }
+
+    .th-horizontal-line-marker::after,
+    .th-indicator-bg .split:first-of-type::after {
+      content: attr(data-value);
+      position: absolute;
+      left: calc(100% - 25px);
+      width: 50px;
+      font-size: 12px;
+      text-align: center;
+      word-wrap: break-word;
+    }
+
+    .th-horizontal-line-marker::after {
+      top: 115%;
+    }
+
+
+    .th-indicator-bg .split:first-of-type::after {
+      top: 110%;
+    }
+
+    .th-indicator.reverse {
+      transform: rotate(180deg);
+    }
+
+    .th-indicator.reverse .th-indicator-bg .split:first-of-type::after,
+    .th-indicator.reverse .th-horizontal-line-marker::after {
+      top: auto;
+      transform: rotate(180deg);
+    }
+
+    .th-indicator.reverse .th-indicator-bg .split:first-of-type::after {
+      bottom: 110%;
+    }
+
+    .th-indicator.reverse .th-horizontal-line-marker::after {
+      bottom: 115%;
+    }
+    
+  </style>
+  <body>
+    <div class="container">
+      <div class="th-indicator">
+        <div class="th-indicator-bg">
+          <div class="split" data-value="Target 85%"></div>
+          <div class="split"></div>
+        </div>
+        <div class="th-line-container">
+          <div class="th-line">
+            <div class="th-horizontal-line-container">
+              <div class="th-horizontal-line-marker" data-value="Stretch 85%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="th-line-secondary"></div>
+      </div>
+    </div>
+    <br/><br/>
+    <div class="container">
+      <div class="th-indicator reverse">
+        <div class="th-indicator-bg">
+          <div class="split" data-value="Target 85%"></div>
+          <div class="split"></div>
+        </div>
+        <div class="th-line-container">
+          <div class="th-line">
+            <div class="th-horizontal-line-container">
+              <div class="th-horizontal-line-marker" data-value="Stretch 85%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="th-line-secondary"></div>
+      </div>
+    </div>
+  </body>
+</html>
